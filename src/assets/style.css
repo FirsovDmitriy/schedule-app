@@ -1,0 +1,7 @@
+.v-calendar-daily__interval {
+  /* display: none; */
+}
+
+.theme--light.v-calendar-daily .v-calendar-daily__day-interval:not(:first-child) {
+  /* display: none !important; */
+}
