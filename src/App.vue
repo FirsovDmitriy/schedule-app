@@ -9,7 +9,8 @@
 
 <script>
 import TheHeader from '@/components/TheHeader'
-import TimelineWeek from '@/components/TimelineWeek'
+// import TimelineWeek from '@/components/TimelineWeek'
+import TimelineWeek from '@/components/calendar/TimelineWeek'
 
 export default {
   name: 'App',
