@@ -2,7 +2,11 @@
   <v-app>
     <the-header />
     <v-main>
-      <timeline-week />
+      <v-row>
+        <v-col>
+          <timeline-week />
+        </v-col>
+      </v-row>
     </v-main>
   </v-app>
 </template>
