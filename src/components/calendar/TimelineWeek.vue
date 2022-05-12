@@ -1,47 +1,42 @@
 <template>
   <div>
-    <v-calendar-weekly
-    :start="firstday"
-  />
-  <!-- <v-row>
-    <v-col v-for="day in 7" :key="day">
-      <v-card-text> {{ day }} </v-card-text>
-    </v-col>
-  </v-row> -->
-  {{ getFirstDayOfWeek() }}
+    <!-- <v-calendar-weekly
+      :start="startWeek"
+    /> -->
+    <v-row>
+      <v-col v-for="day in days" :key="day">
+        <div class="day">
+          <span> {{ day }} </span>
+        </div>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      date: new Date(),
-      firstday: '2022-9-4',
-      diff: 0
+  props: {
+    days: {
+      type: Array,
+      required: true
     }
   },
 
-  methods: {
-    // getFirstday () {
-    //   const firstDay = new Date(this.date.setDate(this.date.getDate() - this.date.getDay())).toUTCString()
-    //   console.log(firstDay)
-    // },
-
-    getFirstDayOfWeek () {
-      const day = this.date.getDay()
-
-      // console.log(day)
-
-      this.diff = this.date.getDate() - day + (day === 0 ? -6 : 1)
-
-      this.firstday = `${this.date.getFullYear()}-${this.date.getMonth() + 1}-${this.diff}`
-      console.log(`${this.date.getFullYear()}-${this.date.getMonth() + 1}-${this.diff}`)
-
-      console.log(new Date(this.date.setDate(this.diff)))
+  data () {
+    return {
+      date: new Date()
     }
   },
 
   computed: {}
 }
 </script>
+
+<style scoped>
+.day {
+  display: flex;
+  justify-content: center;
+  border-right: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+}
+</style>
