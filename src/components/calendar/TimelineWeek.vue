@@ -4,31 +4,50 @@
       :start="startWeek"
     /> -->
     <v-row>
-      <v-col v-for="day in days" :key="day">
+      <v-col v-for="day in days" :key="day.format('YYYMMDD')">
         <div class="day">
-          <span> {{ day }} </span>
+          <span
+            :class="{
+              active: today
+            }"
+          >
+            {{ day.format('D') }} {{ isCurrentDay(day) }}
+          </span>
         </div>
       </v-col>
+      {{ today }}
     </v-row>
   </div>
 </template>
 
 <script>
+// import moment from 'moment'
+
 export default {
   props: {
     days: {
       type: Array,
       required: true
+    },
+    today: {
+      type: Boolean
     }
   },
 
   data () {
     return {
-      date: new Date()
+      date: new Date(),
+      thisDay: false
     }
   },
 
-  computed: {}
+  methods: {
+    isCurrentDay (day) {
+      this.$emit('is-current-day', day)
+    }
+  },
+
+  mounted () {}
 }
 </script>
 
@@ -36,7 +55,11 @@ export default {
 .day {
   display: flex;
   justify-content: center;
-  border-right: 1px solid #e0e0e0;
+  border-right: 2px solid #e0e0e0;
   border-bottom: 1px solid #e0e0e0;
+}
+
+.active {
+  background: greenyellow;
 }
 </style>
