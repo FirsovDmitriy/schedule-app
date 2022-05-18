@@ -4,6 +4,7 @@
     <v-main>
       <header-calendar
         @next-month="nextMonth"
+        @today="today"
         @prev-month="prevMonth"
       />
       <v-row>
@@ -15,6 +16,7 @@
           />
         </v-col>
       </v-row>
+      <row-timeline />
     </v-main>
   </v-app>
 </template>
@@ -24,6 +26,7 @@ import TheHeader from '@/components/TheHeader'
 // import TimelineWeek from '@/components/TimelineWeek'
 import TimelineWeek from '@/components/calendar/TimelineWeek'
 import HeaderCalendar from '@/components/calendar/HeaderCalendar'
+import RowTimeline from '@/components/schedule/RowTimeline'
 
 import moment from 'moment'
 
@@ -33,7 +36,7 @@ export default {
   name: 'App',
 
   components: {
-    TheHeader, TimelineWeek, HeaderCalendar
+    TheHeader, TimelineWeek, HeaderCalendar, RowTimeline
   },
 
   data () {
@@ -42,6 +45,7 @@ export default {
       startWeek: moment().startOf('week'),
       startWeekFormat: moment().startOf('week').format('YYYY-MM-DD'),
       endWeek: moment().endOf('week'),
+      // start day
       startMonth: moment().startOf('month').startOf('week'),
       endMonth: moment().endOf('month'),
       daysWeek: [],
@@ -64,6 +68,19 @@ export default {
       // console.log('start next week 5', week.format('YYYY-MM-DD'))
     },
 
+    prevMonth () {
+      this.startMonth = this.startMonth.clone().subtract(1, 'w')
+    },
+
+    today () {
+      this.startMonth = moment().startOf('month').startOf('week')
+    },
+
+    nextMonth () {
+      // console.log('next month', this.startMonth.add(1, 'M'))
+      this.startMonth = this.startMonth.clone().add(1, 'w')
+    },
+
     getDaysWeek () {
       const day = this.startMonth.clone().subtract(7, 'd')
       const weeks = [...Array(6)].map(() => {
@@ -71,20 +88,13 @@ export default {
         const month = [...Array(7)].map(() => startWeek.add(1, 'd').clone())
         return month
       })
-      // console.log(this.weeks)
+      // console.log(weeks)
       return weeks
     },
 
     isCurrentDay (day) {
+      // console.log(moment().isSame(day, 'd'))
       return moment().isSame(day, 'd')
-    },
-
-    prevMonth () {
-      console.log('prev month')
-    },
-
-    nextMonth () {
-      console.log('next month')
     }
   },
 

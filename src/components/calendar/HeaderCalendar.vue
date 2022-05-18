@@ -13,6 +13,16 @@
         mdi-chevron-left
       </v-icon>
     </v-btn>
+
+    <v-btn
+      @click="today"
+      class="ma-2"
+      outlined
+      color="indigo"
+    >
+      Today
+    </v-btn>
+
     <v-btn
       @click="next"
       class="mx-2"
@@ -35,6 +45,10 @@ export default {
   methods: {
     prev () {
       this.$emit('prev-month')
+    },
+
+    today () {
+      this.$emit('today')
     },
 
     next () {

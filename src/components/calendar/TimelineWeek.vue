@@ -8,20 +8,19 @@
         <div class="day">
           <span
             :class="{
-              active: today
+              active: isCurrentDay(day)
             }"
           >
-            {{ day.format('D') }} {{ isCurrentDay(day) }}
+            {{ day.format('D') }}
           </span>
         </div>
       </v-col>
-      {{ today }}
     </v-row>
   </div>
 </template>
 
 <script>
-// import moment from 'moment'
+import moment from 'moment'
 
 export default {
   props: {
@@ -43,7 +42,8 @@ export default {
 
   methods: {
     isCurrentDay (day) {
-      this.$emit('is-current-day', day)
+      // this.$emit('is-current-day', day)
+      return moment().isSame(day, 'd')
     }
   },
 
