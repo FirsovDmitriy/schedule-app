@@ -3,8 +3,8 @@
     <!-- <v-calendar-weekly
       :start="startWeek"
     /> -->
-    <v-row>
-      <v-col v-for="day in days" :key="day.format('YYYMMDD')">
+    <div class="row-day">
+      <div v-for="day in days" :key="day.format('YYYMMDD')">
         <div class="day">
           <span
             :class="{
@@ -14,8 +14,8 @@
             {{ day.format('D') }}
           </span>
         </div>
-      </v-col>
-    </v-row>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -57,9 +57,17 @@ export default {
   justify-content: center;
   border-right: 2px solid #e0e0e0;
   border-bottom: 1px solid #e0e0e0;
+  width: 50px;
 }
 
 .active {
   background: greenyellow;
+}
+
+.row-day {
+  display: flex;
+  flex-wrap: nowrap;
+  flex: 1 1 auto;
+  margin: -12px;
 }
 </style>

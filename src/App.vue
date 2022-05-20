@@ -1,13 +1,13 @@
 <template>
   <v-app>
-    <the-header />
+    <the-header class="header" />
     <v-main>
       <header-calendar
         @next-month="nextMonth"
         @today="today"
         @prev-month="prevMonth"
       />
-      <v-row>
+      <v-row class="calendar">
         <v-col v-for="(week, index) in getDaysWeek()" :key="index" class="week">
           <timeline-week
             :days="week"
@@ -16,7 +16,7 @@
           />
         </v-col>
       </v-row>
-      <row-timeline />
+      <row class="block-row" />
     </v-main>
   </v-app>
 </template>
@@ -26,9 +26,9 @@ import TheHeader from '@/components/TheHeader'
 // import TimelineWeek from '@/components/TimelineWeek'
 import TimelineWeek from '@/components/calendar/TimelineWeek'
 import HeaderCalendar from '@/components/calendar/HeaderCalendar'
-import RowTimeline from '@/components/schedule/RowTimeline'
 
 import moment from 'moment'
+import Row from './components/Row'
 
 moment.updateLocale('en', { week: { dow: 1 } })
 
@@ -36,7 +36,7 @@ export default {
   name: 'App',
 
   components: {
-    TheHeader, TimelineWeek, HeaderCalendar, RowTimeline
+    TheHeader, TimelineWeek, HeaderCalendar, Row
   },
 
   data () {
@@ -121,7 +121,22 @@ export default {
 </script>
 
 <style scoped>
+.header {
+  z-index: 9;
+}
+.calendar {
+  position: relative;
+  margin-top: 40px;
+  overflow-x: auto;
+  z-index: 9;
+  flex-wrap: nowrap;
+}
 .week {
-  border-right: 1px solid #000;
+  border-right: 4px solid red;
+}
+
+.block-row {
+  width: 100%;
+  top: 0;
 }
 </style>
